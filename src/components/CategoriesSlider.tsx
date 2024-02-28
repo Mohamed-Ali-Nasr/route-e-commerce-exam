@@ -3,14 +3,11 @@ import Slider from "react-slick";
 import { useGetAllCategoriesQuery } from "@/store/cart/cartApi";
 import { selectCart } from "@/store/cart/cartSlice";
 import { useAppSelector } from "@/store/redux-hooks";
-import arrayShuffle from "array-shuffle";
 
 const CategoriesSlider = () => {
   const { categories } = useAppSelector(selectCart);
 
   const { isLoading, isError } = useGetAllCategoriesQuery();
-
-  const shuffleCategories = arrayShuffle(categories);
 
   if (isLoading) {
     return <Loader />;
@@ -64,10 +61,10 @@ const CategoriesSlider = () => {
         </p>
       )}
 
-      {shuffleCategories.length > 0 && (
+      {categories.length > 0 && (
         <div>
           <Slider {...sliderSettings}>
-            {shuffleCategories.map(({ _id, image, name }) => (
+            {categories.map(({ _id, image, name }) => (
               <div key={_id} className="group cursor-pointer">
                 <img
                   className="h-52 sm:w-full object-cover mx-auto mb-4"
