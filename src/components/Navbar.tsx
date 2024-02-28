@@ -51,11 +51,11 @@ const Navbar = () => {
     >
       <div className="max-w-7xl md:px-6 lg:px-8 px-2 mx-auto">
         <div className="relative flex items-center justify-between h-16">
-          <div
-            className="md:hidden absolute inset-y-0 left-0 flex items-center gap-2"
-            onClick={() => setIsOpen((prev) => !prev)}
-          >
-            <div className="inline-flex items-center justify-center p-1.5 rounded-md text-teal-500 border-teal-500 border cursor-pointer ml-1">
+          <div className="md:hidden absolute inset-y-0 left-0 flex items-center gap-2">
+            <div
+              onClick={() => setIsOpen((prev) => !prev)}
+              className="inline-flex items-center justify-center p-1.5 rounded-md text-teal-500 border-teal-500 border cursor-pointer ml-1"
+            >
               <FaBars className="w-6 h-6" />
             </div>
             <div className="flex items-center flex-shrink-0">

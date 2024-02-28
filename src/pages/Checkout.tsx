@@ -19,7 +19,7 @@ export type CheckoutFormValues = {
 };
 
 const Checkout = () => {
-  const [isOnlinePayment, setIsOnlinePayment] = useState(false);
+  const [selectedValue, setSelectedValue] = useState("");
 
   const { cartId } = useAppSelector(selectCart);
   const dispatch = useAppDispatch();
@@ -66,9 +66,10 @@ const Checkout = () => {
   };
 
   const submitForm = async (values: CheckoutFormValues) => {
-    if (isOnlinePayment) {
+    if (selectedValue === "online") {
       await onlinePaymentHandler(values);
-    } else {
+    }
+    if (selectedValue === "cash") {
       await cashPaymentHandler(values);
     }
   };
@@ -170,8 +171,44 @@ const Checkout = () => {
           </div>
         </div>
 
-        <div className="flex items-center justify-center gap-6">
-          <div className="flex items-center px-3 py-1.5 rounded-lg mt-5 bg-gray-200">
+        <div className="flex flex-col gap-6">
+          <div className="flex items-center mb-4">
+            <input
+              id="cash"
+              type="radio"
+              value="cash"
+              className="w-5 h-5"
+              onChange={() => {
+                setSelectedValue("cash");
+              }}
+              checked={selectedValue === "cash"}
+            />
+            <label
+              htmlFor="cash"
+              className="ms-2 text-lg font-bold text-teal-600"
+            >
+              Cash Payment
+            </label>
+          </div>
+
+          <div className="flex items-center">
+            <input
+              id="online"
+              type="radio"
+              className="w-5 h-5"
+              onChange={() => {
+                setSelectedValue("online");
+              }}
+              checked={selectedValue === "online"}
+            />
+            <label
+              htmlFor="online"
+              className="ms-2 text-lg font-bold text-teal-600"
+            >
+              Online Payment
+            </label>
+          </div>
+          {/* <div className="flex items-center px-3 py-1.5 rounded-lg mt-5 bg-gray-200">
             <label
               className="whitespace-nowrap text-xl font-medium cursor-pointer"
               htmlFor="isCash"
@@ -186,13 +223,14 @@ const Checkout = () => {
                 setIsOnlinePayment((prev) => !prev);
               }}
             />
-          </div>
+          </div> */}
           <button
-            disabled={!(dirty && isValid)}
+            disabled={!(dirty && isValid) || !selectedValue}
             type="submit"
             className="hover:bg-teal-700 focus:ring-teal-300 disabled:opacity-65 disabled:cursor-not-allowed flex-1 w-full px-4 py-2 mx-auto mt-5 font-semibold text-center text-white transition-all duration-300 bg-teal-500 rounded-lg cursor-pointer"
           >
-            {isOnlinePayment ? "Online Payment" : "Cash Payment"}
+            Continue with {selectedValue === "online" ? "Online Payment" : ""}{" "}
+            {selectedValue === "cash" ? "Cash Payment" : ""}
           </button>
         </div>
       </form>

@@ -65,7 +65,7 @@ const CategoriesSlider = () => {
         <div>
           <Slider {...sliderSettings}>
             {categories.map(({ _id, image, name }) => (
-              <div key={_id} className="group cursor-pointer">
+              <div key={_id} className="group">
                 <img
                   className="h-52 sm:w-full object-cover mx-auto mb-4"
                   src={image}
