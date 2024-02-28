@@ -53,8 +53,7 @@ const ProductItem = ({ product }: IProductProps) => {
     }
   };
 
-  const [addToWishlist, { isLoading: addWishlistLoading }] =
-    useAddToWishlistMutation();
+  const [addToWishlist] = useAddToWishlistMutation();
 
   const addToWishlistHandler = async (productId: string) => {
     if (token) {
@@ -71,8 +70,7 @@ const ProductItem = ({ product }: IProductProps) => {
     }
   };
 
-  const [removeFromWishList, { isLoading: removeWishlistLoading }] =
-    useRemoveFromWishlistMutation();
+  const [removeFromWishList] = useRemoveFromWishlistMutation();
 
   const removeFromWishListHandler = async (productId: string) => {
     if (token) {
@@ -94,7 +92,7 @@ const ProductItem = ({ product }: IProductProps) => {
     setFiltered(filteredId);
   }, [id, wishlist]);
 
-  if (addCartLoading || addWishlistLoading || removeWishlistLoading) {
+  if (addCartLoading) {
     return <Loader />;
   }
 
@@ -102,12 +100,12 @@ const ProductItem = ({ product }: IProductProps) => {
     <div
       style={{
         boxShadow:
-          "12px 12px 26px rgba(0, 0, 0, 0.2),-12px -12px 26px rgba(255, 255, 255, 0.6)",
+          "3px 3px 8px rgba(0, 0, 0, 0.2),-12px -12px 8px rgba(255, 255, 255, 0.6)",
       }}
       className="group rounded-xl p-4"
     >
       <Link to={`/products/${id}`}>
-        <img src={imageCover} alt={title} />
+        <img className="rounded-md" src={imageCover} alt={title} />
         <h3 className="mt-8 text-lg font-medium text-teal-500">
           {category.name}
         </h3>

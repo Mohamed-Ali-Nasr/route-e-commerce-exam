@@ -16,8 +16,7 @@ const Cart = () => {
   const dispatch = useAppDispatch();
 
   //todo: update quantity call =>
-  const [updateQuantity, { isLoading: updatedLoading }] =
-    useUpdateQuantityMutation();
+  const [updateQuantity] = useUpdateQuantityMutation();
 
   const updateQuantityHandler = async ({
     productId,
@@ -75,7 +74,7 @@ const Cart = () => {
   //todo: get user cart data call =>
   const { isError: getError, isLoading: getLoading } = useGetUserCartQuery();
 
-  if (getLoading || removedLoading || updatedLoading || clearLoading) {
+  if (getLoading || removedLoading || clearLoading) {
     return <Loader />;
   }
   return (
@@ -194,7 +193,7 @@ const Cart = () => {
         </>
       ) : userCart?.numOfCartItems === 0 || getError || !userCart ? (
         <div className="flex flex-col items-center justify-center gap-12 py-8 my-8">
-          <p className="text-5xl font-medium">your Cart Is Empty</p>
+          <p className="sm:text-5xl text-3xl font-medium">your Cart Is Empty</p>
           <Link
             to="/products"
             className="hover:bg-teal-700 focus:ring-teal-300 whitespace-nowrap w-full px-4 py-2 mx-auto mt-8 font-semibold text-center text-white transition-all duration-300 bg-teal-500 rounded-lg cursor-pointer"

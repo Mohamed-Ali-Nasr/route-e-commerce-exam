@@ -1,6 +1,5 @@
 import Loader from "./Loader";
 import Slider from "react-slick";
-import { Link } from "react-router-dom";
 import { useGetAllCategoriesQuery } from "@/store/cart/cartApi";
 import { selectCart } from "@/store/cart/cartSlice";
 import { useAppSelector } from "@/store/redux-hooks";
@@ -70,12 +69,14 @@ const CategoriesSlider = () => {
           <Slider {...sliderSettings}>
             {shuffleCategories.map(({ _id, image, name }) => (
               <div key={_id} className="group cursor-pointer">
-                <Link to="/categories">
-                  <img className="h-52 mx-auto mb-4" src={image} alt={name} />
-                  <p className="group-hover:text-teal-500 mb-4 text-lg text-center text-gray-500 transition-all duration-300">
-                    {name}
-                  </p>
-                </Link>
+                <img
+                  className="h-52 sm:w-full object-cover mx-auto mb-4"
+                  src={image}
+                  alt={name}
+                />
+                <p className="group-hover:text-teal-500 mb-4 text-lg text-center text-gray-500 transition-all duration-300">
+                  {name}
+                </p>
               </div>
             ))}
           </Slider>

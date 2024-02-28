@@ -22,6 +22,7 @@ interface CartSlice {
   userWishlist: IUserWishlist | null;
   countWishlist: number;
   brandDetails: IBrand | null;
+  categoryDetails: ICategory | null;
 }
 
 const initialState: CartSlice = {
@@ -37,6 +38,7 @@ const initialState: CartSlice = {
   userWishlist: null,
   countWishlist: 0,
   brandDetails: null,
+  categoryDetails: null,
 };
 
 const cartSlice = createSlice({
@@ -90,6 +92,10 @@ const cartSlice = createSlice({
     setBrandDetails: (state, action: PayloadAction<IBrand | null>) => {
       state.brandDetails = action.payload;
     },
+
+    setCategoryDetails: (state, action: PayloadAction<ICategory | null>) => {
+      state.categoryDetails = action.payload;
+    },
   },
 });
 
@@ -108,6 +114,7 @@ export const {
   setCountWishlist,
   setBrands,
   setBrandDetails,
+  setCategoryDetails,
 } = cartSlice.actions;
 
 export const selectCart = (state: RootState) => state.cart;

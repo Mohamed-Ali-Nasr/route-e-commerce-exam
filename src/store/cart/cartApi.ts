@@ -2,6 +2,7 @@ import {
   IBrandApi,
   IBrandDetailsApi,
   ICategoryApi,
+  ICategoryDetailsApi,
   IProductApi,
   IProductDetailsApi,
   IUserCart,
@@ -14,6 +15,7 @@ import {
   setBrands,
   setCartId,
   setCategories,
+  setCategoryDetails,
   setCountWishlist,
   setNumOfItems,
   setProductDetails,
@@ -81,6 +83,24 @@ const cartApi = api.injectEndpoints({
       },
     }),
 
+    getCategoryDetails: builder.mutation<ICategoryDetailsApi, string>({
+      query: (categoryId) => ({
+        url: `api/v1/categories/${categoryId}`,
+        method: "GET",
+      }),
+
+      async onQueryStarted(_arg, { dispatch, queryFulfilled }) {
+        try {
+          const { data } = await queryFulfilled;
+          const { data: categoryData } = data;
+          dispatch(setCategoryDetails(categoryData));
+        } catch (err) {
+          console.log(err);
+          dispatch(setCategoryDetails(null));
+        }
+      },
+    }),
+
     getBrandDetails: builder.mutation<IBrandDetailsApi, string>({
       query: (brandId) => ({
         url: `api/v1/brands/${brandId}`,
@@ -90,8 +110,8 @@ const cartApi = api.injectEndpoints({
       async onQueryStarted(_arg, { dispatch, queryFulfilled }) {
         try {
           const { data } = await queryFulfilled;
-          const { data: brandDta } = data;
-          dispatch(setBrandDetails(brandDta));
+          const { data: brandData } = data;
+          dispatch(setBrandDetails(brandData));
         } catch (err) {
           console.log(err);
           dispatch(setBrandDetails(null));
@@ -301,6 +321,7 @@ export const {
   useGetAllCategoriesQuery,
   useGetAllProductsQuery,
   useGetAllBrandsQuery,
+  useGetCategoryDetailsMutation,
   useGetBrandDetailsMutation,
   useGetProductDetailsQuery,
   useGetUserCartQuery,

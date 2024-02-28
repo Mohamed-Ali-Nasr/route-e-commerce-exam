@@ -39,10 +39,9 @@ const ProductDetails = () => {
   const { isError: productError, isLoading: productLoading } =
     useGetProductDetailsQuery(id!);
 
-  const [addToWishlist, { isLoading: addWishlistLoading }] =
-    useAddToWishlistMutation();
-
   //todo: add product to wishlist call =>
+  const [addToWishlist] = useAddToWishlistMutation();
+
   const addToWishlistHandler = async (productId: string) => {
     try {
       await addToWishlist({ productId }).unwrap();
@@ -55,8 +54,7 @@ const ProductDetails = () => {
   };
 
   //todo: remove product from wishlist call =>
-  const [removeFromWishList, { isLoading: removeWishlistLoading }] =
-    useRemoveFromWishlistMutation();
+  const [removeFromWishList] = useRemoveFromWishlistMutation();
 
   const removeFromWishListHandler = async (productId: string) => {
     try {
@@ -78,13 +76,7 @@ const ProductDetails = () => {
     setFiltered(filteredId);
   }, [id, wishlist]);
 
-  if (
-    productLoading ||
-    addLoading ||
-    addWishlistLoading ||
-    removeWishlistLoading ||
-    wishlistLoading
-  ) {
+  if (productLoading || addLoading || wishlistLoading) {
     return <Loader />;
   }
 

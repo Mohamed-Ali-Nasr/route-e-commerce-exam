@@ -27,6 +27,7 @@ export interface IProductDetailsApi {
 }
 
 export interface ICategory {
+  slug: string;
   _id: string;
   name: string;
   image: string;
@@ -34,6 +35,25 @@ export interface ICategory {
 
 export interface ICategoryApi {
   data: ICategory[];
+}
+
+export interface ICategoryDetailsApi {
+  data: ICategory;
+}
+
+export interface IBrand {
+  slug: string;
+  name: string;
+  image: string;
+  _id: string;
+}
+
+export interface IBrandApi {
+  data: IBrand[];
+}
+
+export interface IBrandDetailsApi {
+  data: IBrand;
 }
 
 export interface IUserCart {
@@ -78,19 +98,4 @@ export interface IUserWishlist {
     title: string;
     price: number;
   }[];
-}
-
-export interface IBrand {
-  slug: string;
-  name: string;
-  image: string;
-  _id: string;
-}
-
-export interface IBrandApi {
-  data: IBrand[];
-}
-
-export interface IBrandDetailsApi {
-  data: IBrand;
 }

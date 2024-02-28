@@ -5,7 +5,6 @@ import {
 } from "@/store/cart/cartApi";
 import { selectCart } from "@/store/cart/cartSlice";
 import { useAppSelector } from "@/store/redux-hooks";
-import arrayShuffle from "array-shuffle";
 import { useState } from "react";
 
 const Brands = () => {
@@ -14,8 +13,7 @@ const Brands = () => {
   const { brands, brandDetails } = useAppSelector(selectCart);
 
   //todo: get brand details call =>
-  const [getBrandsDetails, { isLoading: brandsDetailsLoading }] =
-    useGetBrandDetailsMutation();
+  const [getBrandsDetails] = useGetBrandDetailsMutation();
 
   const getBrandsDetailsHandler = async (brandId: string) => {
     try {
@@ -27,11 +25,9 @@ const Brands = () => {
   };
 
   //todo: get all brands call =>
-  const { isLoading: allBrandsLoading, isError } = useGetAllBrandsQuery();
+  const { isLoading, isError } = useGetAllBrandsQuery();
 
-  const shuffleProducts = arrayShuffle(brands);
-
-  if (allBrandsLoading || brandsDetailsLoading) {
+  if (isLoading) {
     return <Loader />;
   }
 
@@ -45,13 +41,13 @@ const Brands = () => {
         </p>
       )}
 
-      {shuffleProducts.length > 0 && (
+      {brands.length > 0 && (
         <div className="md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 md:gap-16 grid grid-cols-1 gap-8">
-          {shuffleProducts.map(({ _id, image, name }) => (
+          {brands.map(({ _id, image, name }) => (
             <div
               style={{
                 boxShadow:
-                  "12px 12px 26px rgba(0, 0, 0, 0.2),-12px -12px 26px rgba(255, 255, 255, 0.6)",
+                  "3px 3px 8px rgba(0, 0, 0, 0.2),-12px -12px 8px rgba(255, 255, 255, 0.6)",
               }}
               className="group rounded-xl p-4 cursor-pointer"
               key={_id}

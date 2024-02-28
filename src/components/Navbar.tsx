@@ -15,8 +15,8 @@ import {
 import { FaRegHeart } from "react-icons/fa6";
 
 const Navbar = () => {
-  const [isOpen, setIsisOpen] = useState(false);
-  const [isView, setIsisView] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [isView, setIsView] = useState(false);
 
   const { token, name, email } = useAppSelector(selectAuth);
   const { numOfItems, countWishlist } = useAppSelector(selectCart);
@@ -32,14 +32,14 @@ const Navbar = () => {
 
   useEffect(() => {
     document.addEventListener("click", () => {
-      setIsisView(false);
-      setIsisOpen(false);
+      setIsView(false);
+      setIsOpen(false);
     });
 
     return () => {
       document.removeEventListener("click", () => {
-        setIsisView(false);
-        setIsisOpen(false);
+        setIsView(false);
+        setIsOpen(false);
       });
     };
   });
@@ -52,15 +52,20 @@ const Navbar = () => {
       <div className="max-w-7xl md:px-6 lg:px-8 px-2 mx-auto">
         <div className="relative flex items-center justify-between h-16">
           <div
-            className="md:hidden absolute inset-y-0 left-0 flex items-center"
-            onClick={() => setIsisOpen((prev) => !prev)}
+            className="md:hidden absolute inset-y-0 left-0 flex items-center gap-2"
+            onClick={() => setIsOpen((prev) => !prev)}
           >
             <div className="inline-flex items-center justify-center p-1.5 rounded-md text-teal-500 border-teal-500 border cursor-pointer ml-1">
               <FaBars className="w-6 h-6" />
             </div>
+            <div className="flex items-center flex-shrink-0">
+              <Link to="/">
+                <img className="w-auto h-8" src={logo} alt="fresh-cart" />
+              </Link>
+            </div>
           </div>
 
-          <div className="flex-1 flex items-center justify-center md:items-stretch md:justify-start mr-[90px] md:mr-0">
+          <div className="flex-1 hidden md:flex items-center justify-center md:items-stretch md:justify-start mr-[90px] md:mr-0">
             <div className="flex items-center flex-shrink-0">
               <Link to="/">
                 <img className="w-auto h-8" src={logo} alt="fresh-cart" />
@@ -70,7 +75,7 @@ const Navbar = () => {
             <div className="md:block md:ml-6 hidden">
               <div className="flex space-x-2">
                 {" "}
-                <NavItems />
+                <NavItems setIsOpen={setIsOpen} />
               </div>
             </div>
           </div>
@@ -102,7 +107,7 @@ const Navbar = () => {
 
                 <div
                   className="sm:mr-3 relative p-1 mr-1 text-center bg-teal-500 rounded-full cursor-pointer"
-                  onClick={() => setIsisView((prev) => !prev)}
+                  onClick={() => setIsView((prev) => !prev)}
                 >
                   <span className="px-2 text-xl text-white">
                     {name?.split("").slice(0, 1).join(" ").toUpperCase()}
@@ -140,7 +145,7 @@ const Navbar = () => {
       {/* mobile Navbar */}
       <div className={`md:hidden ${!isOpen && "hidden"}`}>
         <div className="px-2 pt-2 pb-3 space-y-1">
-          <NavItems isMobile />
+          <NavItems setIsOpen={setIsOpen} isMobile />
         </div>
       </div>
     </nav>
