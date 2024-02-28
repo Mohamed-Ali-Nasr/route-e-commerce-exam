@@ -208,22 +208,6 @@ const Checkout = () => {
               Online Payment
             </label>
           </div>
-          {/* <div className="flex items-center px-3 py-1.5 rounded-lg mt-5 bg-gray-200">
-            <label
-              className="whitespace-nowrap text-xl font-medium cursor-pointer"
-              htmlFor="isCash"
-            >
-              Is Online
-            </label>
-            <input
-              className=" w-5 h-5 ml-2 rounded-md cursor-pointer"
-              type="checkbox"
-              id="isCash"
-              onChange={() => {
-                setIsOnlinePayment((prev) => !prev);
-              }}
-            />
-          </div> */}
           <button
             disabled={!(dirty && isValid) || !selectedValue}
             type="submit"
