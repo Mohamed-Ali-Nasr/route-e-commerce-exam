@@ -27,7 +27,7 @@ const FeaturedProduct = () => {
       )}
 
       {products.length > 0 && (
-        <div className="md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mD:gap-8 grid grid-cols-1 gap-16">
+        <div className="md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 md:gap-8 grid grid-cols-1 gap-16">
           {products.slice(0, 20).map((product) => (
             <ProductItem key={product.id} product={product} />
           ))}

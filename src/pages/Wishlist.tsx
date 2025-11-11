@@ -11,6 +11,7 @@ import { toast } from "react-toastify";
 
 const Wishlist = () => {
   const { userWishlist } = useAppSelector(selectCart);
+
   const dispatch = useAppDispatch();
 
   const [addToCart, { isLoading: addCartLoading }] = useAddToCartMutation();
